@@ -1,16 +1,9 @@
-# flutter_app
+# flutter 
 
-A new Flutter project.
+nomadcoder flutter 강의 메모
 
-## Getting Started
+### 2.3
+widget은 레고와 같다고 볼 수 있음. 위젯을 레고 블럭처럼 합쳐서 앱을 만들 수 있음. 공식 위젯도 많음. flutter widget 카탈로그에서 확인할 수 있음. widget of week도 있음. (나중에 고수가 되면 확인해보길)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+xcode simulator 열 때: `open -a Simulator`
+화면은 scaffold를 가져야한다는 rule이 있음. saffold는 화면의 구조를 결정해줌. 약간 건축할 때 지지대같은 것.

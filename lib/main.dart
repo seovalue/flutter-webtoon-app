@@ -14,34 +14,70 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int counter = 0;
+  List<int> numbers = [];
+  bool showTitle = true;
 
   void onClicked() {
-    counter = counter + 1;
+    setState(() {
+      numbers.add(numbers.length);
+    });
+  }
+
+  void toggle() {
+    setState(() {
+      showTitle = !showTitle;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(
+            textTheme:
+                const TextTheme(titleLarge: TextStyle(color: Colors.blue))),
         home: Scaffold(
             backgroundColor: const Color(0xFFF4EDDB),
             body: Center(
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Click Count',
-                  style: TextStyle(fontSize: 40),
-                ),
-                Text(
-                  '$counter',
-                  style: const TextStyle(fontSize: 40),
-                ),
-                IconButton(
-                    iconSize: 40,
-                    onPressed: onClicked,
-                    icon: const Icon(Icons.add_box_rounded))
+                showTitle ? const MyLargeTitle() : Text('nothing'),
+                IconButton(onPressed: toggle, icon: Icon(Icons.remove_red_eye)),
               ],
             ))));
+  }
+}
+
+class MyLargeTitle extends StatefulWidget {
+  const MyLargeTitle({
+    super.key,
+  });
+
+  @override
+  State<MyLargeTitle> createState() => _MyLargeTitleState();
+}
+
+class _MyLargeTitleState extends State<MyLargeTitle> {
+  @override
+  void initState() {
+    super.initState();
+    print("init state");
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("dispose");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print("build");
+    return Text('Hello Joanne',
+        style: TextStyle(
+          fontSize: 40,
+          color: Theme.of(context).textTheme.titleLarge!.color,
+        ));
   }
 }

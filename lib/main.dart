@@ -11,18 +11,34 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        // background color
-        backgroundColor: const Color(0xFFE7626C),
-        textTheme: const TextTheme(
-          // headline color
-          displayLarge: TextStyle(
-            color: Color(0xFF232B55),
+      home: Scaffold(
+          body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Container(
+                height: 100,
+                color: Colors.red,
+                child: const Text('Item 1 - Longer Text'),
+              ),
+              Flexible(
+                child: Container(
+                  height: 100,
+                  color: Colors.blue,
+                  child: Text('Item 2'),
+                ),
+              ),
+              Container(
+                height: 100,
+                color: Colors.orange,
+                child: Text('Item 3'),
+              ),
+            ],
           ),
-        ),
-        cardColor: const Color(0xFFF4EDDB),
-      ),
-      home: const HomeScreen(),
+        ],
+      )),
     );
   }
 }

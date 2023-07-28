@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class PomodoroHomeScreen extends StatefulWidget {
+  const PomodoroHomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<PomodoroHomeScreen> createState() => _PomodoroHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _PomodoroHomeScreenState extends State<PomodoroHomeScreen> {
   static int intialTotalCounts = 1500;
 
   int totalSeconds = intialTotalCounts;

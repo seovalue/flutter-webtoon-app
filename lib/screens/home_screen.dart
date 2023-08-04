@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/webtoon.dart';
 import 'package:flutter_app/services/api_service.dart';
+import 'package:flutter_app/widgets/webtoon_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -12,13 +13,13 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text(
-            "오늘의 웹툰",
+            "Webtoon",
             style: TextStyle(
               fontSize: 24,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
             ),
           ),
-          foregroundColor: Colors.green,
+          foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           elevation: 2, // shadow
         ),
@@ -26,14 +27,15 @@ class HomeScreen extends StatelessWidget {
           future: webtoons,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  var webtoon = snapshot.data![index];
-                  return Text(webtoon.title);
-                },
-                separatorBuilder: (context, index) => const SizedBox(width: 20),
+              return Column(
+                children: [
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Expanded(
+                    child: makeList(snapshot),
+                  ),
+                ],
               );
             } else {
               return const Center(
@@ -42,5 +44,18 @@ class HomeScreen extends StatelessWidget {
             }
           },
         ));
+  }
+
+  ListView makeList(AsyncSnapshot<List<WebtoonModel>> snapshot) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: snapshot.data!.length,
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      itemBuilder: (context, index) {
+        var webtoon = snapshot.data![index];
+        return Webtoon(webtoonModel: webtoon);
+      },
+      separatorBuilder: (context, index) => const SizedBox(width: 40),
+    );
   }
 }

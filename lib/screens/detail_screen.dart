@@ -3,6 +3,7 @@ import 'package:flutter_app/models/webtoon.dart';
 import 'package:flutter_app/models/webtoon_detail_model.dart';
 import 'package:flutter_app/models/webtoon_episode_model.dart';
 import 'package:flutter_app/services/api_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/episode_widget.dart';
@@ -19,6 +20,25 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   late Future<WebtoonDetailModel> webtoon;
   late Future<List<WebtoonEpisodeModel>> webtoonEpisodes;
+  late SharedPreferences preferences;
+  bool isFavoriteToon = false;
+
+  static String PREF_KEY = "favoriteToons";
+
+  Future initPreferences() async {
+    preferences = await SharedPreferences.getInstance();
+    final favoriteToons = preferences.getStringList(PREF_KEY);
+    if (favoriteToons != null) {
+      if (favoriteToons.contains(widget.webtoonModel.id) == true) {
+        setState(() {
+          isFavoriteToon = true;
+        });
+      }
+    } else {
+      // preferences 초기화
+      await preferences.setStringList(PREF_KEY, []);
+    }
+  }
 
   @override
   void initState() {
@@ -27,6 +47,22 @@ class _DetailScreenState extends State<DetailScreen> {
     webtoon = ApiService().getToonById(widget.webtoonModel.id);
     webtoonEpisodes =
         ApiService().getLatestEpisodesById(widget.webtoonModel.id);
+    initPreferences();
+  }
+
+  onHeartTap() async {
+    final favoriteToons = preferences.getStringList(PREF_KEY);
+    if (favoriteToons != null) {
+      if (isFavoriteToon) {
+        favoriteToons.remove(widget.webtoonModel.id);
+      } else {
+        favoriteToons.add(widget.webtoonModel.id);
+      }
+      await preferences.setStringList(PREF_KEY, favoriteToons);
+      setState(() {
+        isFavoriteToon = !isFavoriteToon;
+      });
+    } else {}
   }
 
   @override
@@ -44,6 +80,16 @@ class _DetailScreenState extends State<DetailScreen> {
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
         elevation: 2, // shadow
+        actions: [
+          IconButton(
+            onPressed: onHeartTap,
+            icon: Icon(
+              isFavoriteToon
+                  ? Icons.favorite_rounded
+                  : Icons.favorite_outline_outlined,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

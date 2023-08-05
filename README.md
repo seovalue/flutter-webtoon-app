@@ -1,18 +1,11 @@
-# flutter 
-## first code challenge
-```dart
-Transform.translate(
-  offset: const Offset(0, -40),
-  child: const CurrencyCard(
-    currencyName: 'Dollar',
-    code: 'USD',
-    amount: '428',
-    icon: Icons.attach_money_outlined,
-    isInverted: false,
-  ),
-);
-```
-위에서 반복되는 translate과 offset을 CurrencyCard 내부로 숨겨보기
+## flutter 학습
+[flutter로 웹툰 앱 만들기 for beginners, free](https://nomadcoders.co/flutter-for-beginners)
 
-## pomodoro
-* [UI on behance](https://www.behance.net/gallery/98918603/POMO-UIKIT)
+### 결과물
+![main_page](./images/main_page.png)
+![detail_page](./images/detail_page.png)
+
+### 학습내역
+모든 걸 적진 않았지만 일부는 [velog.io/@seovalue](velog.io/@seovalue)에 작성했어요.
+
+230806, 끝!
